@@ -35,7 +35,13 @@
         </a>
     </div>
 {% else %}
-    <p>您还未成为吃了吗商家，注册或登陆，注册登录赠送2大美女！</p>
+    {% block page_content %}
+        <div class="page-header">
+            <h1>Hello,<span style="font-size: 16px">勇敢而聪明的年轻人!</span></h1>
+        </div>
+        <h5>欢迎来到吃了么,您还未成为吃了么商家，注册或登陆，注册登录赠送2大美女！</h5>
+    {% endblock %}
+
 {% endif %}
 
 {% endblock %}
