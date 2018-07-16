@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+
+{% if session['is_login'] %}
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -32,10 +34,9 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
-
-{#    分页#}
-
-
+{% else %}
+    <p>您还未成为吃了吗商家，注册或登陆，注册登录赠送2大美女！</p>
+{% endif %}
 
 {% endblock %}
+{#    分页#}
