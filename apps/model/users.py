@@ -1,12 +1,12 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .base import db
+from .base import db, Base
 
-class Users(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
+
+class Users(Base):
     username = db.Column(db.String(32),unique=True,nullable=False)
     password = db.Column(db.String(128),nullable=False)
-    password_hash = db.Column(db.String(128), nullable=True)          # 模型中加入密码散列值
+    # password_hash = db.Column(db.String(128), nullable=True)          # 模型中加入密码散列值
     email = db.Column(db.String(64), nullable=True, unique=True)     # 新建一个邮箱字段
 
 
@@ -21,4 +21,4 @@ class Users(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
     def __repr__(self):
-        return 'Users -{}'.format(self.name)
+        return 'Users -{}'.format(self.username)
