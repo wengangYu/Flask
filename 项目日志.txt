@@ -1,0 +1,25 @@
+使用flask-login完成用户注册/登录 以及商家显示
+    一.设置篇
+        在app/cms中新建一个py文件,来写flask_login命名为login_man:
+        1.在login_man中 导入  flask_login import LoginManager,并实例化login_manager = LoginManager()注意括号内是需要有app的,
+        这个我们需要放在apps/init下面login_manager.init_app(app)完成注册.
+        2.在login_man中设置一个回调函数@login_manager.user_loader
+                                     def load_user(user_id):
+                                         return Users.query.get(user_id)
+        3.如果要使用限制登录:login_required 给需要增加验证登录的地方,增加这个一个装饰器,这里需要配合指定登录页面的地址设置:
+        login_manager.login_view = 'user.log'
+        4.在我们app.init中导入login_man 中实例化的login_manager,并设置login_manager.init_app(app)完成注册
+    二.使用篇
+        判断用户登录,注销,以及用户点击页面字段跳转到登录页面后,登录成功转到用户的页面
+        1.登录
+            在登录的视图函数中,先实例化user=Users(),当user通过了数据清洗和合法性校验的时候,我们可以使用flask_login中的login_user(user)
+            记录此用户,并重定向到首页.前端可以使用current_user.is_authenticated来进行判断用户是否登录 current_user.可以点出该用户数据库
+            中的字段信息进行显示
+        2.注销
+            要完成点击主页注销后,页面不带用户信息重定向到主页
+            我们首先分配路由信息,并定义函数使用到logout_user()这个函数,自动为我们清理用户的session值,并重定向到主页.
+        3.用户点击页面字段跳转到登录页面后,登录成功转到用户的页面
+            如果我们使用了login_required来限制用户登录时候,我们会发现当未登录用户点击被限制的页面时候,地址栏会出现http://127.0.0.1:5000/
+            user/log/?next=%2Fuser%2Fmerchants%2F   如果想要实现当用户点击登录被限制的页面时候登录成功后出现在限制页面,我们需要在登录视图
+            函数中来获取next字段(request.args.get('next'))如果next字段不存在并且为了防止重定向攻击所以也需要判断next字段内开头
+            是否有'/'那么就重定向到主页 next = url_for('主页') 如果以上判断不执行,那么我们就重定向到next字段的地址.

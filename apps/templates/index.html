@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if session['is_login'] %}
+{% if current_user.is_authenticated %}
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -36,10 +36,11 @@
     </div>
 {% else %}
     {% block page_content %}
-        <div class="page-header">
+        <div class="page-header" style="text-align: center">
             <h1>Hello,<span style="font-size: 16px">勇敢而聪明的年轻人!</span></h1>
+            <h5>欢迎来到吃了么,您还未成为吃了么商家，注册或登陆赠送2大美女！</h5>
         </div>
-        <h5>欢迎来到吃了么,您还未成为吃了么商家，注册或登陆，注册登录赠送2大美女！</h5>
+
     {% endblock %}
 
 {% endif %}
