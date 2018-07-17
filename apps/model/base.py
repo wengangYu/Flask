@@ -11,4 +11,5 @@ class Base(db.Model):
         for k,v in f.items():
             if hasattr(self,k) and k != 'id':
                 setattr(self,k,v)
+
 from .users import Users
