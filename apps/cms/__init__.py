@@ -4,3 +4,4 @@ cms_bp =Blueprint('user',__name__,url_prefix='/user') #实例化蓝图
 
 
 from apps.cms.auth_view import reg,index,log
+from apps.cms.shop_view import add_shop

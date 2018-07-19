@@ -24,8 +24,14 @@ class ShopInfo(Base):
     is_fp = db.Column(db.Boolean, default=True)
     # 是否准标识
     is_zun = db.Column(db.Boolean, default=False)
+    # 店铺logo
+    shop_logo = db.Column(db.String(128), default='')
+    # 店铺评分
+    shop_rating = db.Column(db.Float, default=5.0)
     #关联商家
     seller_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    # 建立一个反向关系
+    seller = db.relationship("Users", backref="shop")
     def __repr__(self):
         return "<ShopInfo-{}>".format(self.shop_name)
 

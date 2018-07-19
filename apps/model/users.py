@@ -18,4 +18,4 @@ class Users(UserMixin, Base):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
     def __repr__(self):
-        return 'Users -{}'.format(self.username)
+        return '<Users -{}>'.format(self.username)

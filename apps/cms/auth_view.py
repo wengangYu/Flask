@@ -3,18 +3,17 @@ from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 
 from apps.cms import cms_bp
-from apps.cms.forms import RegForm, LogForm
+from apps.forms.user_forms import RegForm, LogForm
 from apps.model.base import db
 from apps.model.users import Users
 
 #主页
 @cms_bp.route('/',endpoint='主页',methods=['GET','POST'])
 def index():
+    shop=[]
     if current_user.is_authenticated:
-        print(current_user.username)
-    else:
-        print('======================')
-    return render_template('index.html')
+        shop = current_user.shop
+    return render_template('index.html',stores=shop)
 #注册
 @cms_bp.route('/reg/',endpoint='reg',methods=['GET','POST'])
 def reg():
@@ -50,8 +49,3 @@ def seller_logout():
     logout_user()
     return redirect(url_for('user.主页'))
 
-#商家资料
-@cms_bp.route('/merchants/',endpoint='商家')
-@login_required
-def merchants():
-    return '你点我干嘛'
