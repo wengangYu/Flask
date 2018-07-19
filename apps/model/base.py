@@ -13,3 +13,4 @@ class Base(db.Model):
                 setattr(self,k,v)
 
 from .users import Users
+from .shop_info import ShopInfo
