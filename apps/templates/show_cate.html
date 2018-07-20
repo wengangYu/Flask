@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="panel panel-default" style="width: 70%;margin: 60px auto">
+        <table class="table table-hover">
+            <tr>
+                <th colspan="5" style="text-align: center;font-size: 16px;background-color: darkgray">
+                    <span style="color: crimson">{{ shop.shop_name }}</span>う菜品分类
+                </th>
+            </tr>
+            <tr>
+                <td>序号</td>
+                <td>分类名称</td>
+                <td>分类描述</td>
+                <td>菜品信息</td>
+                <td>所属店铺</td>
+            </tr>
+            {% for store in form %}
+                <tr>
+                    <th>{{ store.id }}</th>
+                    <th>{{ store.name }}</th>
+                    <th>{{ store.description}}</th>
+                    <th>
+                        <a>添加</a>
+                        <a>查看</a>
+                    </th>
+                    <th>{{ shop.shop_name }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

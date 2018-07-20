@@ -21,13 +21,18 @@
                     </tr>
                     {% for store in stores %}
                         <tr>
-                            <td>{{ store.id }}</td>
-                            <td>{{ store.shop_name }}</td>
-                            <td>{{ store.shop_rating }}</td>
-                            <td>¥{{ store.start_cost }}</td>
-                            <td>¥{{ store.shipping_fee }}</td>
-                            <td><a>添加</a> <a>查看</a></td>
-                            <td><a>添加</a> <a>查看</a></td>
+                            <th>{{ store.id }}</th>
+                            <th>{{ store.shop_name }}</th>
+                            <th>{{ store.shop_rating }}</th>
+                            <th>¥{{ store.start_cost }}</th>
+                            <th>¥{{ store.shipping_fee }}</th>
+                            <th>
+                                <a href="{{ url_for('user.add_menu_cate',sid = store.id )}}">添加</a>
+                                <a href="{{ url_for('user.show_menu_cate',sid = store.id )}}">查看</a>
+                            </th>
+                            <th>
+                                <a>添加</a> <a>查看</a>
+                            </th>
                         </tr>
                     {% endfor %}
                 </table>
