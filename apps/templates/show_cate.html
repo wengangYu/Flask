@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="panel panel-default" style="width: 70%;margin: 60px auto">
+    <style>
+    a{text-decoration: none}
+    </style>
+    <div class="panel panel-default" style="width: 90%;margin: 60px auto">
         <table class="table table-hover">
             <tr>
-                <th colspan="5" style="text-align: center;font-size: 16px;background-color: darkgray">
+                <th colspan="8" style="text-align: center;font-size: 16px;background-color:gainsboro">
                     <span style="color: crimson">{{ shop.shop_name }}</span>う菜品分类
                 </th>
             </tr>
             <tr>
-                <td>序号</td>
-                <td>分类名称</td>
-                <td>分类描述</td>
-                <td>菜品信息</td>
-                <td>所属店铺</td>
+                <th style="text-align: center">序号</th>
+                <th style="text-align: center">分类名称</th>
+                <th style="text-align: center">菜品数量</th>
+                <th style="text-align: center">平均价格</th>
+                <th style="text-align: center">所属店铺</th>
+                <th style="text-align: center">菜品信息</th>
             </tr>
             {% for store in form %}
                 <tr>
-                    <th>{{ store.id }}</th>
-                    <th>{{ store.name }}</th>
-                    <th>{{ store.description}}</th>
-                    <th>
-                        <a>添加</a>
-                        <a>查看</a>
-                    </th>
-                    <th>{{ shop.shop_name }}</th>
+                    <td style="text-align: center">{{ loop.index }}</td>
+                    <td style="text-align: center">{{ store[0] }}</td>
+                    <td style="text-align: center">{{ store[1] }}</td>
+                    <td style="text-align: center">¥ {{ store[2]}}元</td>
+                    <td style="text-align: center">{{ shop.shop_name }}</td>
+                    <td style="text-align: center">
+                        <a style="text-decoration: none" href="{{ url_for('user.add_food') }}?shop_id={{ shop.id }}">添加菜品</a>
+                        <a style="text-decoration: none" href="{{ url_for('user.show_food',sid=shop.id) }}">查看菜品</a>
+                    </td>
+
                 </tr>
             {% endfor %}
         </table>

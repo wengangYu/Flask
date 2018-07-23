@@ -12,5 +12,8 @@ class Base(db.Model):
             if hasattr(self,k) and k != 'id':
                 setattr(self,k,v)
 
+    def __getitem__(self, item):    #判断对象是否有v值,如果有则返回字典的v
+        if hasattr(self,item):
+            return getattr(self,item)
 from .users import Users
 from .seller_model import ShopInfo

@@ -30,6 +30,7 @@ def reg():
 #登录页面
 @cms_bp.route('/log/',endpoint='log',methods=['GET','POST'])
 def log():
+    u = request.args.get('user')
     form = LogForm(request.form)
     if request.method =="POST" and form.validate():
         user = Users.query.filter(Users.username==form.username.data).first()
@@ -37,7 +38,7 @@ def log():
             login_user(user)
             nexts = request.args.get('next')
             if not nexts or not nexts.startswith('/'):#判断是否有next,or 判断next开头是否斜线开头(防止重定向攻击)
-                nexts = url_for('user.主页')
+                nexts = url_for('user.主页')+'?user={}'.format(current_user.id)
             return redirect(nexts)
         else:
             form.password.errors = ['用户名或者密码有误']

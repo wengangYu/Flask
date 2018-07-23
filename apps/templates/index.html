@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <table class="table table-hover">
                     <tr>
-                        <td colspan="7" ><span style="color: red;font-weight: bold">{{ current_user.username }}</span> 的店铺</td>
+                        <td colspan="7" ><span style="color: red;font-weight: bold;">{{ current_user.username }}</span> 的店铺</td>
                     </tr>
                     <tr>
                         <td>序号</td>
@@ -17,21 +17,24 @@
                         <td>起送价格</td>
                         <td>配送费</td>
                         <td>菜品分类</td>
-                        <td>菜品信息</td>
+                        <td>菜品明细</td>
                     </tr>
                     {% for store in stores %}
                         <tr>
                             <th>{{ store.id }}</th>
-                            <th>{{ store.shop_name }}</th>
+                            <th><a href="{{ url_for('user.update_shop',sid = store.id ) }}">{{ store.shop_name }}</a></th>
                             <th>{{ store.shop_rating }}</th>
                             <th>¥{{ store.start_cost }}</th>
                             <th>¥{{ store.shipping_fee }}</th>
                             <th>
-                                <a href="{{ url_for('user.add_menu_cate',sid = store.id )}}">添加</a>
-                                <a href="{{ url_for('user.show_menu_cate',sid = store.id )}}">查看</a>
+                                <a style="text-decoration: none"
+                                   href="{{ url_for('user.add_menu_cate',sid = store.id ) }} ">添加</a>
+                                <a style="text-decoration: none"
+                                   href="{{ url_for('user.show_menu_cate',sid = store.id ) }}">查看</a>
                             </th>
                             <th>
-                                <a>添加</a> <a>查看</a>
+                                <a style="text-decoration: none" href="{{ url_for('user.add_food' ) }}?shop_id={{ store.id }}">添加</a>
+                                <a style="text-decoration: none" href="{{ url_for('user.show_food',sid = store.id ) }}">查看</a>
                             </th>
                         </tr>
                     {% endfor %}

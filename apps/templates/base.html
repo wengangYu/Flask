@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('user.主页') }}">吃了么-商家管理后台</a>
+                <a class="navbar-brand" href="{{ url_for('user.主页') }}?user={{ current_user.id }}">吃了么-商家管理后台</a>
             </div>
             {#            右边标签#}
             <div class="navbar-collapse collapse">
@@ -20,26 +20,17 @@
                     <li><a href="{{ url_for('user.开店') }}">我要开店</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="">菜品信息</a></li>
+                    <li><a href="{{ url_for('user.index_food') }}?user={{ current_user.id }}">菜品信息</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_authenticated%}
-                    <li><a href="#">欢迎:{{ current_user.username }} 您的到来!</a></li>
-                    {% endif %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户中心<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            {% if current_user.is_authenticated %}
+                    {% if current_user.is_authenticated %}
+                                <li><a href="#">欢迎:{{ current_user.username }} 您的到来!</a></li>
                                 <li><a href="{{ url_for('user.logout') }}">注销</a></li>
                                 {% else %}
                                 <li><a href="{{ url_for('user.reg') }}">注册</a></li>
                                 <li><a href="{{ url_for('user.log') }}">登录</a></li>
                             {% endif %}
-
-
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">用户论坛</a></li>
-                        </ul>
                     </li>
                     <li><a href="#">关于我们</a></li>
                 </ul>

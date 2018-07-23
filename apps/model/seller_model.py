@@ -32,6 +32,13 @@ class ShopInfo(Base):
     seller_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     # 建立一个反向关系
     seller = db.relationship("Users", backref="shop")
+
+    def keys(self):
+        return "shop_name", "start_cost", "shipping_fee", "shop_notice", "discounts", "is_ontime", \
+               "is_bird", "is_bao", "is_fp", "is_zun"
+
+
+
     def __repr__(self):
         return "<ShopInfo-{}>".format(self.shop_name)
 

@@ -1,7 +1,7 @@
 from wtforms import StringField, FloatField, validators, Form, DecimalField, BooleanField
 
 #增加店铺
-class Add_Shop(Form):
+class AddShopForm(Form):
     shop_name = StringField(label='店铺名字',
                             validators=[validators.InputRequired(message='请输入店铺名称'),validators.Length(3,12,message='请输入3-12个字符的店铺名称')],
                             render_kw={'class': 'form-control', 'placeholder': '请输入店铺名称'})
